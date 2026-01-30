@@ -81,7 +81,7 @@ app.get("/api/health", (req, res) => {
 
 // Contact handler function (reusable for both routes)
 const handleContact = (req, res) => {
-  const { name, email, message, interest } = req.body;
+  const { name, email, message, subject, interest } = req.body;
 
   // Validate required fields
   if (!name || !email || !message) {
@@ -97,6 +97,7 @@ const handleContact = (req, res) => {
   const sanitizedName = sanitizeInput(name);
   const sanitizedEmail = sanitizeInput(email);
   const sanitizedMessage = sanitizeInput(message);
+  const sanitizedSubject = subject ? sanitizeInput(subject) : "";
   const sanitizedInterest = interest ? sanitizeInput(interest) : "";
 
   // Validate sanitized inputs aren't empty
@@ -112,16 +113,27 @@ const handleContact = (req, res) => {
   const recipient = process.env.CONTACT_TO || process.env.EMAIL;
 
   // Format email body to include all information
-  const emailBody = sanitizedInterest
-    ? `Interested in: ${sanitizedInterest.charAt(0).toUpperCase() + sanitizedInterest.slice(1)}\n\nFrom: ${sanitizedName} (${sanitizedEmail})\n\nMessage:\n${sanitizedMessage}`
-    : `From: ${sanitizedName} (${sanitizedEmail})\n\nMessage:\n${sanitizedMessage}`;
+  const emailBody = [
+    sanitizedInterest
+      ? `Interested in: ${sanitizedInterest.charAt(0).toUpperCase() + sanitizedInterest.slice(1)}`
+      : "",
+    sanitizedSubject ? `Subject: ${sanitizedSubject}` : "",
+    `From: ${sanitizedName} (${sanitizedEmail})`,
+    "",
+    "Message:",
+    sanitizedMessage,
+  ]
+    .filter(Boolean)
+    .join("\n");
 
   return transporter
     .sendMail({
       from: `HTA+ Website <${process.env.EMAIL}>`,
       replyTo: sanitizedEmail,
       to: recipient,
-      subject: `HTA+ Inquiry from ${sanitizedName}`,
+      subject: sanitizedSubject
+        ? `HTA+ Inquiry: ${sanitizedSubject}`
+        : `HTA+ Inquiry from ${sanitizedName}`,
       text: emailBody,
     })
     .then(() => {
