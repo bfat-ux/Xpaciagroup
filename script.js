@@ -118,29 +118,3 @@ if (contactForm) {
   });
 }
 
-const shareLinks = document.querySelectorAll("[data-share]");
-if (shareLinks.length > 0) {
-  const shareUrl = encodeURIComponent(window.location.href);
-  const shareTitle = encodeURIComponent(document.title);
-
-  shareLinks.forEach((link) => {
-    const platform = link.getAttribute("data-share");
-    let url = "";
-
-    if (platform === "linkedin") {
-      url = `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`;
-    }
-
-    if (platform === "x") {
-      url = `https://x.com/intent/tweet?url=${shareUrl}&text=${shareTitle}`;
-    }
-
-    if (platform === "email") {
-      url = `mailto:?subject=${shareTitle}&body=${shareUrl}`;
-    }
-
-    if (url) {
-      link.setAttribute("href", url);
-    }
-  });
-}

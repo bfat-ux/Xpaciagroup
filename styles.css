@@ -223,11 +223,28 @@ img {
 .hero-carousel .carousel-next { right: 16px; }
 
 @media (max-width: 768px) {
-  .hero-carousel .carousel-caption {
-    display: none;
-  }
   .hero-carousel .carousel-item img {
-    height: 60vh;
+    height: 52vh;
+  }
+  .hero-carousel .carousel-caption {
+    position: static;
+    transform: none;
+    width: 100%;
+    border-radius: 0;
+    padding: 16px;
+    text-align: left;
+    background-color: var(--xpacia-night);
+  }
+  .hero-carousel .carousel-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-carousel .carousel-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+  .hero-carousel .carousel-indicators {
+    bottom: 8px;
   }
 }
 
@@ -261,12 +278,6 @@ body > section.section:nth-of-type(even) {
 }
 .section .text-center.section-title { display: block; }
 .section .text-center.section-intro { display: block; }
-
-hr.separator {
-  border: none;
-  border-top: 1px solid var(--xpacia-blue);
-  margin: 40px 0;
-}
 
 /* Card grid (3 columns for Core Approach) */
 .card-grid {
@@ -341,36 +352,16 @@ hr.separator {
 }
 .me-2 { margin-right: 8px; }
 
-/* How We Work list */
-#how-we-work ol {
-  max-width: 640px;
-  margin: 0 auto;
-  padding-left: 1.25rem;
-}
-#how-we-work ol li {
-  margin-bottom: 0.5rem;
-}
-
-/* Experience list */
-.list-unstyled {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.list-unstyled li {
-  margin-bottom: 0.5rem;
-}
-
 /* About section */
 #about h3 {
   font-size: 1.25rem;
   color: var(--xpacia-slate);
   margin: 1.5rem 0 0.5rem;
 }
-#about .text-muted {
-  color: var(--xpacia-blue);
-  font-size: 0.9rem;
-  margin-top: 24px;
+#about p:not(.section-intro):not(.text-center) {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Contact form */
@@ -463,6 +454,10 @@ textarea.form-control {
     pointer-events: none;
     transition: max-height 0.25s ease, opacity 0.25s ease;
   }
+  .site-nav a {
+    padding: 12px 0;
+    font-size: 1rem;
+  }
   .site-nav.is-open {
     max-height: 280px;
     opacity: 1;
@@ -476,5 +471,17 @@ textarea.form-control {
 @media (max-width: 600px) {
   .section {
     padding: 40px 0;
+  }
+  .hero-carousel .carousel-prev,
+  .hero-carousel .carousel-next {
+    display: none;
+  }
+  .me-2 {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  #cta .btn {
+    width: 100%;
+    text-align: center;
   }
 }
