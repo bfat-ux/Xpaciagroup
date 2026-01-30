@@ -1,0 +1,17 @@
+[Unit]
+Description=Xpacia Group Backend API Server
+After=network.target
+
+[Service]
+Type=simple
+User=bernardfatoye
+WorkingDirectory=/home/bernardfatoye/xpaciagroup/hta-backend
+Environment=NODE_ENV=production
+ExecStart=/home/bernardfatoye/.nvm/versions/node/v24.13.0/bin/node /home/bernardfatoye/xpaciagroup/hta-backend/index.js
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
