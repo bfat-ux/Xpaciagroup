@@ -1,3 +1,32 @@
+/* Hero carousel */
+const carousel = document.getElementById("hero-carousel");
+if (carousel) {
+  const items = carousel.querySelectorAll(".carousel-item");
+  const prevBtn = carousel.querySelector(".carousel-prev");
+  const nextBtn = carousel.querySelector(".carousel-next");
+  const indicatorBtns = carousel.querySelectorAll(".carousel-indicators button");
+  let index = 0;
+  const total = items.length;
+
+  const goTo = (i) => {
+    index = (i + total) % total;
+    items.forEach((el, j) => el.classList.toggle("active", j === index));
+    indicatorBtns.forEach((el, j) => el.classList.toggle("active", j === index));
+  };
+
+  if (prevBtn) prevBtn.addEventListener("click", () => goTo(index - 1));
+  if (nextBtn) nextBtn.addEventListener("click", () => goTo(index + 1));
+  indicatorBtns.forEach((btn, i) => {
+    btn.addEventListener("click", () => goTo(Number(btn.getAttribute("data-index"))));
+  });
+
+  let autoplay = setInterval(() => goTo(index + 1), 5000);
+  carousel.addEventListener("mouseenter", () => clearInterval(autoplay));
+  carousel.addEventListener("mouseleave", () => {
+    autoplay = setInterval(() => goTo(index + 1), 5000);
+  });
+}
+
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector(".site-nav");
 
@@ -63,8 +92,8 @@ if (contactForm) {
     const payload = {
       name: formData.get("name"),
       email: formData.get("email"),
+      subject: formData.get("subject") || "",
       message: formData.get("message"),
-      interest: formData.get("interest") || "",
     };
 
     setStatus("Sending your message...");
