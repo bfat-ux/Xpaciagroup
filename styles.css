@@ -1,18 +1,21 @@
 /* XPACIA Group – design-led architecture. No Bootstrap. */
 
 :root {
-  --xpacia-blue: #5e84a0;
-  --xpacia-mist: #abbfcd;
-  --xpacia-slate: #314453;
-  --xpacia-indigo: #6176aa;
-  --xpacia-ice: #a2b8c8;
-  --xpacia-night: #323e51;
-  --xpacia-white: #f8f9fa;
-  --section-alt: #e9f0f5;
+  /* Main palette: gray + deep olive green (client-approved) */
+  --olive-deep: #354a24;
+  --olive: #4a5d3a;
+  --olive-light: #5a7045;
+  --gray-dark: #2d2d2d;
+  --gray: #4a4a4a;
+  --gray-mid: #6b6b6b;
+  --gray-light: #d4d4d4;
+  --gray-pale: #e8e8e8;
+  --gray-white: #f5f5f5;
+  --section-alt: #ebebeb;
   --container: 1100px;
   --gap: 24px;
   --radius: 12px;
-  --shadow: 0 10px 24px rgba(50, 62, 81, 0.12);
+  --shadow: 0 10px 24px rgba(45, 45, 45, 0.12);
 }
 
 *,
@@ -28,8 +31,8 @@ html {
 body {
   margin: 0;
   font-family: Arial, system-ui, sans-serif;
-  background-color: var(--xpacia-mist);
-  color: var(--xpacia-night);
+  background-color: var(--gray-light);
+  color: var(--gray-dark);
   line-height: 1.6;
 }
 
@@ -54,7 +57,7 @@ img {
   position: absolute;
   top: -44px;
   left: 16px;
-  background: var(--xpacia-night);
+  background: var(--olive-deep);
   color: #fff;
   padding: 8px 12px;
   border-radius: 8px;
@@ -69,8 +72,8 @@ img {
 .site-header {
   position: sticky;
   top: 0;
-  background-color: var(--xpacia-white);
-  box-shadow: 0 2px 8px rgba(50, 62, 81, 0.15);
+  background-color: var(--gray-white);
+  box-shadow: 0 2px 8px rgba(45, 45, 45, 0.15);
   z-index: 50;
 }
 
@@ -85,7 +88,7 @@ img {
 .brand {
   font-weight: 700;
   font-size: 1.25rem;
-  color: var(--xpacia-night);
+  color: var(--olive-deep);
 }
 
 .site-nav {
@@ -95,18 +98,18 @@ img {
 }
 .site-nav a {
   font-size: 0.95rem;
-  color: var(--xpacia-night);
+  color: var(--gray-dark);
   font-weight: 500;
 }
 .site-nav a:hover,
 .site-nav a:focus {
-  color: var(--xpacia-indigo);
+  color: var(--olive-deep);
 }
 
 .nav-toggle {
   display: none;
   background: none;
-  border: 1px solid var(--xpacia-slate);
+  border: 1px solid var(--gray);
   border-radius: 8px;
   padding: 8px 10px;
   cursor: pointer;
@@ -116,7 +119,7 @@ img {
   width: 18px;
   height: 2px;
   margin: 4px 0;
-  background: var(--xpacia-night);
+  background: var(--gray-dark);
 }
 
 /* Hero carousel */
@@ -147,9 +150,9 @@ img {
   bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
-  width: min(100% - 32px, 720px);
+  width: min(100% - 32px, var(--prose-max));
   padding: 24px;
-  background-color: rgba(49, 68, 83, 0.85);
+  background-color: rgba(53, 74, 36, 0.9);
   color: #fff;
   border-radius: 10px;
   text-align: center;
@@ -234,7 +237,7 @@ img {
     border-radius: 0;
     padding: 16px;
     text-align: left;
-    background-color: var(--xpacia-night);
+    background-color: var(--olive-deep);
   }
   .hero-carousel .carousel-actions {
     flex-direction: column;
@@ -254,34 +257,47 @@ img {
   padding: 60px 0;
 }
 main .section:nth-of-type(odd) {
-  background-color: var(--xpacia-white);
+  background-color: var(--gray-white);
 }
 main .section:nth-of-type(even) {
   background-color: var(--section-alt);
 }
 main .section + .section {
-  border-top: 1px solid rgba(49, 68, 83, 0.06);
+  border-top: 1px solid rgba(45, 45, 45, 0.06);
 }
 
 .section-title {
   font-size: clamp(1.75rem, 4vw, 2.35rem);
   font-weight: 700;
   letter-spacing: 0.02em;
-  color: var(--xpacia-slate);
+  color: var(--olive-deep);
   margin: 0 0 0.5rem;
 }
 .section-intro {
-  max-width: 720px;
+  max-width: var(--prose-max);
   margin: 0 auto 1.75rem;
   font-size: 1.1rem;
   line-height: 1.5;
-  color: var(--xpacia-slate);
+  color: var(--gray);
 }
 .text-center {
   text-align: center;
 }
 .section .text-center.section-title { display: block; }
 .section .text-center.section-intro { display: block; }
+
+/* Constrained prose block (e.g. About body text) */
+.section-body {
+  max-width: var(--prose-max);
+  margin: 0 auto;
+}
+.section-body p {
+  margin: 0 0 1rem;
+  color: var(--gray-dark);
+}
+.section-body p:last-child {
+  margin-bottom: 0;
+}
 
 /* Card grid (3 columns for Core Approach) */
 .card-grid {
@@ -291,7 +307,7 @@ main .section + .section {
   margin-top: 24px;
 }
 .card {
-  background: var(--xpacia-white);
+  background: var(--gray-white);
   border: none;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -301,13 +317,13 @@ main .section + .section {
 .card-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--xpacia-slate);
+  color: var(--olive-deep);
   margin: 0 0 8px;
 }
 .card-text {
   margin: 0;
   font-size: 0.95rem;
-  color: var(--xpacia-night);
+  color: var(--gray-dark);
   line-height: 1.5;
 }
 
@@ -350,27 +366,27 @@ main .section + .section {
   transition: background 0.2s ease, color 0.2s ease;
 }
 .btn-primary {
-  background-color: var(--xpacia-indigo);
+  background-color: var(--olive-deep);
   color: #fff;
 }
 .btn-primary:hover {
-  background-color: var(--xpacia-blue);
+  background-color: var(--olive);
   color: #fff;
 }
 .btn-secondary {
-  background-color: var(--xpacia-slate);
-  color: var(--xpacia-white);
+  background-color: var(--gray-dark);
+  color: var(--gray-white);
 }
 .btn-secondary:hover {
-  background-color: var(--xpacia-night);
-  color: var(--xpacia-white);
+  background-color: var(--gray);
+  color: var(--gray-white);
 }
 .btn-success {
-  background-color: var(--xpacia-blue);
+  background-color: var(--olive);
   color: #fff;
 }
 .btn-success:hover {
-  background-color: var(--xpacia-slate);
+  background-color: var(--olive-deep);
   color: #fff;
 }
 .me-2 { margin-right: 8px; }
@@ -378,7 +394,7 @@ main .section + .section {
 /* About section */
 #about h3 {
   font-size: 1.25rem;
-  color: var(--xpacia-slate);
+  color: var(--olive-deep);
   margin: 1.5rem 0 0.5rem;
 }
 #about p:not(.section-intro):not(.text-center) {
@@ -404,17 +420,17 @@ main .section + .section {
 .form-control {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid var(--xpacia-mist);
+  border: 1px solid var(--gray-light);
   border-radius: 8px;
   font-size: 1rem;
   font-family: inherit;
-  background: var(--xpacia-white);
-  color: var(--xpacia-night);
+  background: var(--gray-white);
+  color: var(--gray-dark);
 }
 .form-control:focus {
   outline: none;
-  border-color: var(--xpacia-indigo);
-  box-shadow: 0 0 0 2px rgba(97, 118, 170, 0.2);
+  border-color: var(--olive-deep);
+  box-shadow: 0 0 0 2px rgba(53, 74, 36, 0.2);
 }
 textarea.form-control {
   min-height: 120px;
@@ -427,7 +443,7 @@ textarea.form-control {
 .form-status {
   margin: 12px 0 0;
   font-size: 0.9rem;
-  color: var(--xpacia-slate);
+  color: var(--gray);
   min-height: 1.25em;
 }
 .form-status.is-error {
@@ -436,15 +452,15 @@ textarea.form-control {
 
 /* Footer */
 .site-footer {
-  background-color: var(--xpacia-night);
-  color: var(--xpacia-white);
+  background-color: var(--olive-deep);
+  color: var(--gray-white);
   padding: 40px 0;
   text-align: center;
 }
 .site-footer p {
   margin: 0 0 8px;
   font-size: 0.95rem;
-  color: rgba(248, 249, 250, 0.9);
+  color: rgba(245, 245, 245, 0.95);
 }
 .site-footer p:last-child {
   margin-bottom: 0;
@@ -468,9 +484,9 @@ textarea.form-control {
     flex-direction: column;
     align-items: stretch;
     padding: 16px;
-    background: var(--xpacia-white);
-    border-top: 1px solid var(--xpacia-ice);
-    box-shadow: 0 8px 16px rgba(50, 62, 81, 0.1);
+    background: var(--gray-white);
+    border-top: 1px solid var(--gray-pale);
+    box-shadow: 0 8px 16px rgba(45, 45, 45, 0.1);
     max-height: 0;
     overflow: hidden;
     opacity: 0;
